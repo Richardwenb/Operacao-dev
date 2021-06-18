@@ -1,0 +1,22 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1596027708818.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "760735412",
+    "id" : "BBE49530",
+    "lastKnownWriteTime" : 1596028130,
+    "last_content_update" : 1596028130099,
+    "path" : "~/geovana/operacao/app/utils.R",
+    "project_path" : "utils.R",
+    "properties" : {
+        "cursorPosition" : "6,41",
+        "scrollLine" : "0"
+    },
+    "relative_order" : 3,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}

@@ -1,0 +1,123 @@
+HowTo install RSAP
+==================
+
+You must download and install the SAP NW RFC SDK first.  This can be obtained from the SAP service portal
+ http://service.sap.com/swdc
+-> Download
+-> Support Packages and Patches
+-> Entry by Application Group
+-> Additional Components
+-> SAP NW RFC SDK
+[on to your particular version and OS flavour]
+
+Please insure that YAML and reshape are installed:
+install.packages(c('yaml', 'reshape'))
+
+The RSAP package can be found at https://github.com/piersharding/RSAP
+
+
+The easiest way to install RSAP is to clone the repository and use
+R CMD INSTALL
+
+You must ensure that you have the NW RFC SDK installed which is
+available through downloads on the SAP Service Market Place
+
+First Option:
+
+From my own repository - in R:
+
+For UNIX like OSes:
+
+install.packages('devtools')
+library(devtools)
+install_github('piersharding/RSAP', args=c("--configure-args='--with-nwrfcsdk-include=/home/piers/code/sap/nwrfcsdk/include --with-nwrfcsdk-lib=/home/piers/code/sap/nwrfcsdk/lib' --no-clean-on-error"))
+
+The args= value passed in must correspond to the correct location for your setup for the INCLUDE and LIB paths to the NW RFC SDK you have installed from SAP.
+
+
+Under *NIX YOU MUST MAKE SURE THAT YOU ADD THE LIB PATH TO LD_LIBRARY_PATH
+EG:
+export LD_LIBRARY_PATH=/usr/sap/rfcsdk/lib
+
+Or better still add this to your ldconfig (Linux) in /etc/ld.so.conf (don't forget to run ldconfig afterwards)
+
+Note: previously, there was a method for installing from CRAN, but this package is no longer hosted on CRAN.
+
+
+For Windows:
+ * You must have downloaded and unpacked the SAP NW RFC SDK into C:/nwrfcsdk
+ * Download RTools (http://cran.r-project.org/bin/windows/Rtools/) for your R installation version - see the additional notes for windows below
+ * Then run:
+install.packages('devtools)
+library(devtools)
+install_github('piersharding/RSAP', args=c("--configure-args='--with-nwrfcsdk-include=C:/nwrfcsdk/include --with-nwrfcsdk-lib=C:/nwrfcsdk/lib' --no-clean-on-error"))
+
+
+An article by Alvaro may also be helpful - https://blogs.sap.com/2012/06/21/analytics-with-sap-and-r-windows-version/ .
+
+
+You must ensure that all your installed packages (especially httr, and stringr) are up to date.  The easiest way to do this is to start R and:
+
+update.packages()
+
+
+
+Second Option:
+
+Set the environment variables that locate the INCLUDE and LIB
+directories:
+
+export NWRFCSDK_INCLUDE=/home/piers/code/sap/nwrfcsdk/include
+export NWRFCSDK_LIBS=/home/piers/code/sap/nwrfcsdk/lib
+
+Download the package from GitHub -
+either:
+git clone git@github.com:piersharding/RSAP.git
+
+or:
+retrieve and unpack https://github.com/piersharding/RSAP/archive/master.zip
+
+Then run the build and install command from the package root
+directory:
+
+R CMD INSTALL --build --preclean --clean .
+
+This has been tested under Ubuntu 12.04 - how it builds on
+other platforms is unknown.
+
+The generic compile instructions from SAP for building with the NW RFC SDK can be found here http://www.stechno.net/sap-notes.html?view=sapnote&id=1056696 (OSS Note 1056696).
+
+
+
+Additional Windows build help
+=============================
+
+Thanks to Alvaro for making this work.  This was last used for R-2.15.0 under 64bit architecture.
+
+Download RTools (http://cran.r-project.org/bin/windows/Rtools/) for your R installation version
+Make sure that you're using the right R for the NWRFCSDK folder...R 64bit for NWRFCSDK 64bit.
+You can check this if you go to Environment Variables --> Path and look for something like this C:\Program Files\R\R-2.15.0\bin\x64 (x32 or x64)
+
+
+For R 3.x :
+
+Get the NW RFC SDK from SAP service.sap.com and unpack it in C:/nwrfcsdk - make sure that you have the header and library directories positioned as C:/nwrfcsdk/include and C:/nwrfcsdk/lib.  Copy the contents of C:/nwrfcsdk/lib into the Windows system32 directory ie: C:/windows/system32.
+
+Install the latest RTools from http://cran.r-project.org/bin/windows/Rtools/ and ensure that you have the corresponding latest R from http://cran.r-project.org/bin/windows/base/.  Install and reboot.  You must make absolutely sure that the RTools install worked correctly - check for any errors when you startup R.
+
+Install devtools for R http://cran.r-project.org/web/packages/devtools/index.html - to do this (or any core package) start R at the command line and run:
+
+> install.packages('devtools')
+
+Install the dependencies for RSAP :
+
+> install.packages(c('yaml', 'reshape'))
+
+
+Now move onto the main event - startup R again and:
+
+> library(devtools)
+> install_github('RSAP', username='piersharding', args=c("--configure-args=--with-nwrfcsdk-include=C:/nwrfcsdk/include --with-nwrfcsdk-lib=C:/nwrfcsdk/lib' --no-clean-on-error"))
+
+Common problems:
+The most frequent problem is to do with sapnwrfc.dll not being found or not being able to load it's dependencies.  When the load of RSAP.dll fails it should still be left in a location like 'C:/Program Files/R/R-3.0.1/library/RSAP/libs/x64/RSAP.dll' .  Download the dpendency walker from http://www.dependencywalker.com/ and test it against RSAP.dll.  This should show which libs are unresolved.  Copy missing libraries into the system32 directory, and then repeat the process until resolved.

@@ -1,0 +1,97 @@
+
+**** Trace file opened at 2020-03-24 16:11:11.161406 UTC-03:00 (GMT), Encoding UTF-8
+NW RFC Library: SDK variant, Release 750 Patch Level 5, Compiled on Aug 20 2019 21:18:37
+ CPIC library: 753.2019.02.22 version 3, NI library: 40, Kernel Release: 753 Patch Level 500
+ Current working directory: /home/projetor/geovana/operacao, Program: rsession
+ Hardware: AMD/Intel x86_64 with Linux x86_64, Operating_system: Linux 4.4.0-173-generic
+ Hostname: srvrlinux, IP address: 127.0.1.1, IPv6 address: fe80::20d:3aff:fec0:1e1d
+
+2020-03-24 16:11:11.161510 [140662375798784] >> Info entry
+	Searching for config file sapnwrfc.ini
+
+
+**** Trace file opened at 2020-05-04 08:25:14.109632 UTC-03:00 (GMT), Encoding UTF-8
+NW RFC Library: SDK variant, Release 750 Patch Level 5, Compiled on Aug 20 2019 21:18:37
+ CPIC library: 753.2019.02.22 version 3, NI library: 40, Kernel Release: 753 Patch Level 500
+ Current working directory: /home/projetor/geovana/operacao, Program: rsession
+ Hardware: AMD/Intel x86_64 with Linux x86_64, Operating_system: Linux 4.4.0-173-generic
+ Hostname: srvrlinux, IP address: 127.0.1.1, IPv6 address: fe80::20d:3aff:fec0:1e1d
+
+2020-05-04 08:25:14.110113 [139707521558528] >> Info entry
+	Searching for config file sapnwrfc.ini
+
+2020-05-04 08:26:14.642853 [139707521558528] >> Error entry
+	[Handle: 185524464	ConvID: 	SysID: 	SysNr: 	Target: 	User: 	Codepage: 4103]
+	ommunicationException: Key: RFC_COMMUNICATION_FAILURE, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host srvrlinux with Unicode
+ERROR       timeout occured
+TIME        Mon May  4 08:26:14 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -5
+MODULE      /bas/753_REL/src/krn/si/gw/gwxx.c
+LINE        1147
+DETAIL      timeout 60000 msecs
+SYSTEM CALL GwRead
+COUNTER     2
+
+2020-05-04 08:28:26.906078 [139707521558528] >> Error entry
+	[Handle: 185524464	ConvID: 	SysID: 	SysNr: 	Target: 	User: 	Codepage: 4103]
+	ommunicationException: Key: RFC_COMMUNICATION_FAILURE, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       timeout occured
+TIME        Mon May  4 08:28:26 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -5
+MODULE      /bas/753_REL/src/krn/si/gw/gwxx.c
+LINE        1147
+DETAIL      timeout 60000 msecs
+SYSTEM CALL GwRead
+COUNTER     4
+
+2020-05-04 08:38:54.166180 [139707521558528] >> Error entry
+	[Handle: 185524464	ConvID: 	SysID: 	SysNr: 	Target: 	User: 	Codepage: 4103]
+	ommunicationException: Key: RFC_COMMUNICATION_FAILURE, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       timeout occured
+TIME        Mon May  4 08:38:54 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -5
+MODULE      /bas/753_REL/src/krn/si/gw/gwxx.c
+LINE        1147
+DETAIL      timeout 60000 msecs
+SYSTEM CALL GwRead
+COUNTER     6
+
+2020-05-04 08:42:47.448483 [139707521558528] >> Error entry
+	[Handle: 185524464	ConvID: 	SysID: 	SysNr: 	Target: 	User: 	Codepage: 4103]
+	ommunicationException: Key: RFC_COMMUNICATION_FAILURE, Code: RFC_COMMUNICATION_FAILURE, Message: 
+LOCATION    CPIC (TCP/IP) on local host with Unicode
+ERROR       timeout occured
+TIME        Mon May  4 08:42:47 2020
+RELEASE     753
+COMPONENT   NI (network interface)
+VERSION     40
+RC          -5
+MODULE      /bas/753_REL/src/krn/si/gw/gwxx.c
+LINE        1147
+DETAIL      timeout 60000 msecs
+SYSTEM CALL GwRead
+COUNTER     8
+
+
+**** Trace file opened at 2020-12-04 09:29:10.300201 UTC-03:00 (GMT), Encoding UTF-8
+NW RFC Library: SDK variant, Release 750 Patch Level 5, Compiled on Aug 20 2019 21:18:37
+ CPIC library: 753.2019.02.22 version 3, NI library: 40, Kernel Release: 753 Patch Level 500
+ Current working directory: /home/proxyshiny/operacao, Program: R
+ Hardware: AMD/Intel x86_64 with Linux x86_64, Operating_system: Linux 4.15.0-76-generic
+ Hostname: srvshinyproxy, IP address: 127.0.1.1, IPv6 address: fe80::20d:3aff:fec1:13cb
+
+2020-12-04 09:29:10.300262 [140439732869056] >> Info entry
+	Searching for config file sapnwrfc.ini
+

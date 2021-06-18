@@ -1,0 +1,29 @@
+Version: 0.01 (2012-06-10, released)
+
+	* initial version
+
+Version: 0.02 (Mon Jun 11 06:50:39 NZST 2012, released)
+
+    * fix tables columns so not all required to be passed
+
+Version: 0.03 (Mon Jun 18 09:44:43 NZST 2012, released)
+    * Add function RSAPReadTable for direct call to RFC_READ_TABLE
+
+Version 0.8 (Tue Feb  5 08:06:32 NZDT 2013, released)
+    * Fixed build process to correctly find R.h and to switch between host types
+      - thanks go to Uwe Ligges, and Brian Ripley, for guidance and corrections
+
+Version 0.9 (Sun Feb 10 07:29:19 NZDT 2013, released)
+    * remove multiple Makevars.*
+    * add configure.win and correct Makevars.win
+    * improve install instructions - thanks Alvaro
+
+Version 0.10 (Wed Aug 22 07:01:29 NZST 2018, release)
+    * fixed float values for get_bcd and get_num - thanks morganw3
+
+Version 0.11 (Mon Sep 10 06:42:35 NZST 2018, release)
+    * fixed raw values - thanks morganw3
+
+Version 0.13 (Fri Oct  5 08:45:39 NZDT 2018, release)
+    * fixed number conversions for RSAPReadTable() - thanks James Hill
+
