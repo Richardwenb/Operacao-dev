@@ -37,5 +37,5 @@ RUN R -e "devtools::install_github('piersharding/RSAP')"
 
 
 COPY Rprofile.site /usr/lib/R/etc/
-EXPOSE 4040
+EXPOSE 3838
 CMD ["R", "-e", "shiny::runApp('/root/operacao')"]

@@ -49,7 +49,7 @@ getFaturadoLiquido <- function(){
      }
    }
    faturado <<- faturado_f %>% group_by("COD" = trim(ARTNR), 'FILIAL' = WERKS) %>% summarise('FATURADO' = sum(as.numeric(paste(VV002))))
-   faturado <<- faturado[!(faturado$COD %in% ''),]; faturado <<- faturado[faturado$FILIAL != '1201',]
+   faturado <<- faturado[!(faturado$COD %in% ''),]; #faturado <<- faturado[faturado$FILIAL != '',]
    faturado <<- formatData(faturado);
    faturado <<- faturado %>% group_by(COD, FILIAL, SKU, FAMILIA, FAMILIA_SOP, MERCADO, EMBALAGEM, MARCA, FILIAL_DESC) %>% summarise('FATURADO LÍQUIDO' = sum(FATURADO, na.rm = TRUE))
 }
@@ -57,12 +57,17 @@ getFaturadoLiquido <- function(){
 getCarteira <- function(){
   con = getConnection()
   parms <- list(P_BUKRS = list('1000'), P_MANDT = list('300'), P_VKORG = list('1100'))
-  faturado_f = RSAPInvoke(con, "ZFSD_CARTEIRA", parms)$P_RESULT; 
+  faturado_f1 = RSAPInvoke(con, "ZFSD_CARTEIRA", parms)$P_RESULT; 
   
-  parms <- list(P_BUKRS = list('1000'), P_MANDT = list('300'), P_VKORG = list('1101'))
-  faturado_f = rbind(faturado_f, RSAPInvoke(con, "ZFSD_CARTEIRA", parms)$P_RESULT); RSAPClose(con);
+  parms <- list(P_BUKRS = list('1000'), P_MANDT = list('300'), P_VKORG = list('1200'))
+  faturado_f2 = RSAPInvoke(con, "ZFSD_CARTEIRA", parms)$P_RESULT; 
   
-  carteira <<- faturado_f %>% group_by("COD" = trim(MATNR), 'FILIAL' = WERKS) %>% summarise('CARTEIRA' = sum(as.numeric(VV003)))
+  faturado_f3 = rbind(faturado_f1,faturado_f2); RSAPClose(con);
+  
+  #parms <- list(P_BUKRS = list('1000'), P_MANDT = list('300'), P_VKORG = list('1101'))
+  #faturado_f4 = rbind(faturado_f3, RSAPInvoke(con, "ZFSD_CARTEIRA", parms)$P_RESULT); RSAPClose(con);
+  
+  carteira <<- faturado_f3 %>% group_by("COD" = trim(MATNR), 'FILIAL' = WERKS) %>% summarise('CARTEIRA' = sum(as.numeric(VV003)))
   carteira <<- carteira[!(carteira$COD %in% ''),]; carteira <<- formatData(carteira);
 }
 
@@ -78,7 +83,7 @@ getVendido <- function(){
   }else{
     vendido_v = data.frame(res$DATA, colsplit(res$DATA$WA, ";", names = sub("\\s+$", "", res$FIELDS$FIELDNAME)))
     vendido <<- vendido_v %>% group_by("COD" = trim(MATERIAL), 'FILIAL' = PRODUCTIONPLANT) %>% summarise('VENDIDO' = sum(as.numeric(VOLUME_VENDIDO_KG)))
-    vendido <<- vendido[!(vendido$COD %in% ''),]; vendido <<- formatData(vendido);vendido <<- vendido[!(vendido$FILIAL %in% c('1201')),]
+    vendido <<- vendido[!(vendido$COD %in% ''),]; vendido <<- formatData(vendido);vendido <<- #vendido[!(vendido$FILIAL %in% c('1201')),]
   }
 }
 
@@ -94,7 +99,7 @@ getEstoqueTransferencia <- function(){
   estoque = res %>% group_by("COD" = trim(MATERIAL), "FILIAL" = PLANT, "TIPO" = INVENTORYSTOCKTYPE) %>% summarise(valor = sum(as.numeric(MATLWRHSSTKQTYINMATLBASEUNIT)))
   estoque_transito <<- spread(estoque, key = "TIPO", value = "valor");  estoque_transito <<- formatData(estoque_transito); 
   estoque_transito <<- estoque_transito[!(estoque_transito$COD %in% c('549', '7003', '7004', '3728')),]; 
-  estoque_transito <<- estoque_transito[!(estoque_transito$FILIAL %in% c('1201')),]
+  #estoque_transito <<- estoque_transito[!(estoque_transito$FILIAL %in% c('1201')),]
   estoque_transito$FILIAL <<- as.numeric(estoque_transito$FILIAL)
   estoque_transito <<- estoque_transito %>% group_by(COD, FILIAL, SKU, FAMILIA, FAMILIA_SOP, MERCADO, EMBALAGEM, MARCA, FILIAL_DESC) %>% summarise('ESTOQUE TRANSITO' = sum(as.numeric(`06`)), 
                                                                                                                                                    'ESTOQUE' = sum(as.numeric(`01`)),
@@ -103,7 +108,7 @@ getEstoqueTransferencia <- function(){
 
 getEstoqueTransferenciaAux <- function(){
   con = getConnection()
-  FILIAIS = c("1103", "1107", "1108", "1109", "1110", "1116", "1117", "1118", "1119")
+  FILIAIS = c("1103", "1107", "1108", "1109", "1110", "1116", "1117", "1118", "1119", "1201")
   estoque_transito <<- data.frame("COD" = as.character(), "FILIAL" = as.double(), "TRANSITO" = as.double())
   cl <- makeCluster(4); registerDoParallel(cl)
   
