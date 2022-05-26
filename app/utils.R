@@ -33,6 +33,7 @@ convertTo <- function(dados, convertTo){
   return(dados)
 }
 
+
 convertDataToTurn <-function(producao){
   producao$DATE = as.Date(as.character(producao$MFGORDERCONFIRMATIONENTRYDATE), format = "%Y%m%d")
   producao$DATA_TURNO = producao$DATE
