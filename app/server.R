@@ -17,7 +17,7 @@ server <- function(input, output, session) {
     dados = allDados %>% group_by_at(c('FAMILIA_SOP', 'MERCADO', 'EMBALAGEM', 'MARCA')) %>% summarise_if(is.numeric, sum, na.rm = TRUE)
     outTable(getCalcColumns(dados))
   }
-  
+
   outTable <- function(dados){
     dados = getCalcTotais(dados) %>% mutate_if(is.numeric, ~round(., 2))
 
