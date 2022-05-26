@@ -69,7 +69,7 @@ getCarteira <- function(){
   
   carteira <<- faturado_f3 %>% group_by("COD" = trim(MATNR), 'FILIAL' = WERKS) %>% summarise('CARTEIRA' = sum(as.numeric(VV003)))
   carteira <<- carteira[!(carteira$COD %in% ''),]; carteira <<- formatData(carteira);
-}
+# }
 
 getVendido <- function(){
   con = getConnection()
@@ -80,11 +80,11 @@ getVendido <- function(){
   
   if (is.null(nrow(res$DATA))){
     vendido <<- formatData(data.frame("COD" = 258, 'FILIAL' = 1101, 'VENDIDO' = 0))
-  }else{
+  } else{
     vendido_v = data.frame(res$DATA, colsplit(res$DATA$WA, ";", names = sub("\\s+$", "", res$FIELDS$FIELDNAME)))
     vendido <<- vendido_v %>% group_by("COD" = trim(MATERIAL), 'FILIAL' = PRODUCTIONPLANT) %>% summarise('VENDIDO' = sum(as.numeric(VOLUME_VENDIDO_KG)))
     vendido <<- vendido[!(vendido$COD %in% ''),]; vendido <<- formatData(vendido);vendido <<- #vendido[!(vendido$FILIAL %in% c('1201')),]
-  }
+  } # nolint
 }
 
 
@@ -264,6 +264,5 @@ addDados <- function(tipo_entrada, dados){
       shinyalert(paste0("Os seguintes SKUs precisam se cadastrados no Planner: ", paste(prod_n_cadastrado, collapse = ", "), ". Entre em contado com Adm de Vendas."))
   })
   dbDisconnect(con)
-}
-
-
+    }
+  }
